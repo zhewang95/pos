@@ -1,0 +1,46 @@
+{
+  "name": "+1s",
+  //　每次登录节省下来的时间，请自觉用来为长者延续寿命",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "js/contextMenus.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Some tooltip",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://jiaowu.swjtu.edu.cn/service/login.jsp*",
+        "*://jiaowu.swjtu.edu.cn//service/login.jsp*",
+        "*://jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction",
+        "*://jiaowu.swjtu.edu.cn//servlet/UserLoginSQLAction",
+        "*://dean.swjtu.edu.cn/service/login.jsp*"
+        //"*://dean.swjtu.edu.cn/servlet/UserGenearchLoginAction"
+      ],
+      "js": [
+        "js/libmath.js",
+        "js/libimage.js",
+        "js/libjson.js",
+        "js/student.js",
+        "js/genearch.js",
+        "js/dispatch.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "web_accessible_resources": [
+    "data/*.json"
+  ]
+}
+
