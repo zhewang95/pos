@@ -1,6 +1,6 @@
 {
   "name": "+1s",
-  //　每次登录节省下来的时间，请自觉用来为长者延续寿命",
+  "author": "WangZhe",
   "version": "1.0",
   "manifest_version": 2,
   "background": {
@@ -14,12 +14,16 @@
   },
   "content_scripts": [
     {
+      "all_frames": true,
+      //这个坑　我要哭了
       "matches": [
-        "*://jiaowu.swjtu.edu.cn/service/login.jsp*",
-        "*://jiaowu.swjtu.edu.cn//service/login.jsp*",
-        "*://jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction",
-        "*://jiaowu.swjtu.edu.cn//servlet/UserLoginSQLAction",
-        "*://dean.swjtu.edu.cn/service/login.jsp*"
+        "<all_urls>"
+        //"*://jiaowu.swjtu.edu.cn/service/login.jsp*",
+        //"*://jiaowu.swjtu.edu.cn//service/login.jsp*",
+        //"*://jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction",
+        //"*://jiaowu.swjtu.edu.cn//servlet/UserLoginSQLAction",
+        //"*://dean.swjtu.edu.cn/service/login.jsp*"
+        //"*://service.swjtu.edu.cn:8080/selfservice*"
         //"*://dean.swjtu.edu.cn/servlet/UserGenearchLoginAction"
       ],
       "js": [
@@ -28,6 +32,7 @@
         "js/libjson.js",
         "js/student.js",
         "js/genearch.js",
+        "js/network.js",
         "js/dispatch.js"
       ]
     }
@@ -40,7 +45,7 @@
     "48": "images/icon.png"
   },
   "web_accessible_resources": [
-    "data/*.json"
+    "data/*.*"
   ]
 }
 

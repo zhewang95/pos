@@ -1,50 +1,82 @@
-function noiseDetect(data, x, y) {
+function noiseDetect(data, x, y, width, height) {
     var vector = [[0, -1], [0, 1], [1, -1], [1, 1], [-1, -1], [-1, 1], [1, 0], [-1, 0]];
     var all = 0;
     for (var i = 0; i < 8; i++) {
         var xx = x + vector[i][0];
         var yy = y + vector[i][1];
-        if (xx >= 0 && xx < 22 && yy >= 0 && yy < 55) {
-            if (data[xx * 55 + yy] == 1) {
+        if (xx >= 0 && xx < height && yy >= 0 && yy < width) {
+            if (data[xx * width + yy] == 1) {
                 all++;
             }
         }
     }
-    if (all <= 1)
+    var threshold = 1;
+    if (width == 60)
+        threshold = 0;
+    if (all <= threshold)
         return true;
     return false;
 }
 
 function preprocessImg(imgdata) {
     var data = Array();
-    for (var i = 0, j = 0; i < 4840; i += 4, j++) {
+    var width = imgdata.width;
+    var height = imgdata.height;
+    var t1 = 340, t2 = 150;
+    if (width == 60) {
+        t1 = 430, t2 = 220;
+    }
+    for (var i = 0, j = 0; i < width * height * 4; i += 4, j++) {
         a = imgdata[i], b = imgdata[i + 1], c = imgdata[i + 2];
-        if (a + b + c <= 340 && (!(a == b && b == c)) && (a <= 150 || b <= 150 || c <= 150))
+        if (a + b + c <= t1 && (!(a == b && b == c)) && (a <= t2 || b <= t2 || c <= t2))
             data[j] = 1;
         else
             data[j] = 0;
     }
     var todo = [];
-    for (var i = 0; i < 22; i++) {
-        for (var j = 0; j < 55; j++) {
-            if (data[i * 55 + j] == 0)
+
+    for (var i = 0; i < height; i++) {
+        for (var j = 0; j < width; j++) {
+            if (data[i * width + j] == 0)
                 continue;
             if (i == 0 || j == 0) {
                 todo.push([i, j]);
                 continue;
             }
-            if (noiseDetect(data, i, j))
+            if (noiseDetect(data, i, j, width, height))
                 todo.push([i, j]);
         }
     }
     for (var i = 0; i < todo.length; i++) {
         x = todo[i][0], y = todo[i][1];
-        data[x * 55 + y] = 0;
+        data[x * width + y] = 0;
     }
     return data;
 }
 
-function split(l, data) {
+function split(l, data, width) {
+    if (width == 60) {
+        b = [];
+        for (var i = 0; i < 20; i++) {
+            a = [];
+            for (var j = 0; j < 60; j++)
+                a.push(data[i * 60 + j]);
+            b.push(a.join(' '));
+        }
+        console.log(b.join('\n'));
+        var ret = [];
+        var pos = [[6, 13], [19, 26], [32, 39], [45, 52]];
+        for (var i = 0; i < 4; i++) {
+            var char = new Array();
+            var a = pos[i];
+            for (var p = 0; p < 12; p++) {
+                for (var q = 0; q < 8; q++)
+                    char[p * 8 + q] = [data[(p + 4) * width + (a[0] + q)]];
+            }
+            ret.push(char);
+        }
+        return [true, ret];
+    }
     b = [];
     for (var i = 0; i < 22; i++) {
         a = [];
@@ -167,15 +199,23 @@ function split(l, data) {
 
 function getImgEle() {
     var img = document.getElementById('imgRandom');//dean student
-    if(img==null){//genearch
-        img=document.getElementById('RandomPhoto').firstElementChild;
+    if (img == null) {//genearch
+        if (document.getElementById('RandomPhoto'))
+            img = document.getElementById('RandomPhoto').firstElementChild;
+    }
+    if (img == null) {//network
+        img = document.getElementsByTagName('img')[0];
     }
     var canvas = document.createElement("canvas");
-    canvas.width = 55;
-    canvas.height = 22;
+    width = img.naturalWidth;
+    height = img.naturalHeight;
+    canvas.width = width
+    canvas.height = height
     ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    imgdata = ctx.getImageData(0, 0, 55, 22).data;
+    imgdata = ctx.getImageData(0, 0, width, height).data;
+    imgdata.width = width;
+    imgdata.height = height;
     return imgdata;
 }
 
@@ -189,24 +229,27 @@ function recognize(ws, bs, x) {
     for (var i = 0; i < ws.length; i++) {
         x = sigmoid(mat_add(mat_mul(ws[i], x), bs[i]));
     }
-    return String.fromCharCode(65 + argmax(x, 0, ws[ws.length - 1].length));
+    return argmax(x, 0, ws[ws.length - 1].length);
 }
 
-function img2string(l, name,callback1) {
-    imgdata = getImgEle();
-    data = preprocessImg(imgdata);
-    ret = split(l, data);
-    if (!ret[0]){
+function img2string(l, name, callback1) {
+    var imgdata = getImgEle();
+    var data = preprocessImg(imgdata);
+    var ret = split(l, data, imgdata.width);
+    var base = 65;
+    if (name == "network.json")
+        base = 48;
+    if (!ret[0]) {
         callback1(false);
         return;
     }
     x = ret[1];
-    getData(name,function (data) {
+    getData(name, function (data) {
         var ws = data["weights"];
         var bs = data["biases"];
         verif_code = [];
         for (var i = 0; i < l; i++)
-            verif_code.push(recognize(ws, bs, x[i]));
+            verif_code.push(String.fromCharCode(base + recognize(ws, bs, x[i])));
         callback1(verif_code.join(''));
     });
 }

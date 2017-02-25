@@ -9,6 +9,8 @@ var studentclick = "jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction";
 var genearch="dean.swjtu.edu.cn/service/login.jsp";
 var genearchclick="dean.swjtu.edu.cn/servlet/UserGenearchLoginAction";
 
+var network="service.swjtu.edu.cn:8080/selfservice/module/scgroup/web/login_self.jsf";
+
 function main() {
     if (href.replace("//service", "/service").indexOf(student) != -1) {
         studentmain();
@@ -26,6 +28,10 @@ function main() {
         genearchclicked();
         return;
     }*/
+    if(href.indexOf(network)!=-1){
+        networkmain();
+        return;
+    }
 
 }
 
