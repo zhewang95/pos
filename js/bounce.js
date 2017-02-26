@@ -3,8 +3,8 @@
  */
 var width = document.body.clientWidth;
 var height = document.body.clientHeight;
-var w = null, h = null;
-var x = (Math.random() * 1920).toFixed() % (width - w), y = (Math.random() * 1080).toFixed() % (height - h);
+var w = 200, h = 200;
+var x = (Math.random() * 1920).toFixed() % (width - 2*w), y = (Math.random() * 1080).toFixed() % (height - 2*h);
 var v = 0, dirx = 1, diry = 1, limitv = 100, as = (Math.random() * 10).toFixed() % 5 + 5;
 function Move() {
     if (Math.abs(v) >= limitv) {
@@ -18,6 +18,8 @@ function Move() {
     }
     x += dirx * Math.abs(v)/2;
     y += diry * Math.abs(v)/2;
+    width = document.body.clientWidth;
+    height = document.body.clientHeight;
     if (x > width - w || x < 0)
         dirx = -dirx;
     if (y > height - h || y < 0)
@@ -32,7 +34,6 @@ function PhotoMove() {
     var body = document.body;
     var imgname = chrome.runtime.getURL("images/exciting.png");
     body.innerHTML = body.innerHTML + '<img id="photo" width="200" height="200" src=' + imgname + '>';
-    w = 200, h = 200;
     Move();
 }
 

@@ -44,15 +44,18 @@ function studentmain() {
 }
 
 function studentclicked() {
+    var back=function(){
+        window.history.go(-1);
+        chrome.storage.local.set({"retry": true}, function (result) {
+        });
+    };
     var body = document.body;
     var next = function (result) {
         if (body.innerHTML.indexOf('随机验证码输入错误') != -1) {
             body.innerHTML = body.innerHTML + "<br><h1>-1s</h1><script id='effect'></script>";
             chrome.storage.sync.get({'autoback': true}, function (result) {
                 if (result.autoback) {
-                    window.history.go(-1);
-                    chrome.storage.local.set({"retry": true}, function (result) {
-                    });
+                    setTimeout(back,1000);
                 }
             });
             chrome.storage.sync.get({"effect": false}, function (result) {

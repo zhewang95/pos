@@ -12,7 +12,7 @@ function setAdvertise() {
             data = JSON.parse(l_req.responseText);
             var body = document.body;
             var html = '<html><body><style>body{text-align: center}p{font-size:60px;text-align: center;}' +
-                'div{margin:0 auto; width:1500px; border:1px solid #F0;}img{margin:30}</style>' +
+                'div{margin:0 auto;  border:1px solid #F0;}img{margin:30}</style>' +
                 '<p>广告时间<br>Advertisement</p><div>';
             for (var i = 0; i < data['l']; i++) {
                 html += '<img src="' + 'http://wangzhe.cloud/static/img/pos/' + i + '.png">';

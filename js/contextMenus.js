@@ -52,7 +52,7 @@ chrome.storage.sync.get({'autoback': true}, function (result) {
     chrome.storage.sync.set({'autoback': autoback}, createAutoBack);
 });
 
-chrome.storage.sync.get({'effect': false}, function (result) {
+chrome.storage.sync.get({'effect': true}, function (result) {
     effect = result.effect;
     chrome.storage.sync.set({'effect': effect}, createEffect);
 });
