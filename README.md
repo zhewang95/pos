@@ -1,5 +1,5 @@
 #plus one second
-##[1.0版本下载](+1s.crx)
+##[1.0版本下载](https://github.com/wzbazinga/pos/raw/master/pos.crx)
 ###西南交大登录验证码自动识别填充chrome插件  
 目前支持：  
 1. [教务学生登录](http://jiaowu.swjtu.edu.cn/service/login.jsp?user_type=student)  
