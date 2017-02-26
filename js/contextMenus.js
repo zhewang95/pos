@@ -35,8 +35,8 @@ function createEffect() {
         checked: effect,
         contexts: ["browser_action"],
         onclick: function (info, tab) {
-            limit = !limit;
-            chrome.storage.sync.set({'limit': limit});
+            effect = !effect;
+            chrome.storage.sync.set({'effect': effect});
         }
     });
 }

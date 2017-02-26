@@ -9,7 +9,7 @@
     ]
   },
   "browser_action": {
-    "default_title": "Some tooltip",
+    "default_title": "+1s",
     "default_popup": "html/popup.html"
   },
   "content_scripts": [
@@ -30,6 +30,8 @@
         "js/libmath.js",
         "js/libimage.js",
         "js/libjson.js",
+        "js/bounce.js",
+        "js/advertise.js",
         "js/student.js",
         "js/genearch.js",
         "js/network.js",
@@ -39,13 +41,15 @@
   ],
   "permissions": [
     "contextMenus",
-    "storage"
+    "storage",
+    "http://wangzhe.cloud/*"
   ],
   "icons": {
     "48": "images/icon.png"
   },
   "web_accessible_resources": [
-    "data/*.*"
+    "data/*.*",
+    "images/*.png"
   ]
 }
 
