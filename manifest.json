@@ -1,7 +1,7 @@
 {
   "name": "+1s",
   "author": "WangZhe",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
   "background": {
     "scripts": [
@@ -15,27 +15,50 @@
   "content_scripts": [
     {
       "all_frames": true,
-      //这个坑　我要哭了
       "matches": [
         "<all_urls>"
-        //"*://jiaowu.swjtu.edu.cn/service/login.jsp*",
-        //"*://jiaowu.swjtu.edu.cn//service/login.jsp*",
-        //"*://jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction",
-        //"*://jiaowu.swjtu.edu.cn//servlet/UserLoginSQLAction",
-        //"*://dean.swjtu.edu.cn/service/login.jsp*"
-        //"*://service.swjtu.edu.cn:8080/selfservice*"
-        //"*://dean.swjtu.edu.cn/servlet/UserGenearchLoginAction"
       ],
       "js": [
         "js/libmath.js",
         "js/libimage.js",
-        "js/libjson.js",
+        "js/libjson.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://jiaowu.swjtu.edu.cn/service/login.jsp*",
+        "*://jiaowu.swjtu.edu.cn//service/login.jsp*"
+      ],
+      "js": [
+        "js/student.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://jiaowu.swjtu.edu.cn/servlet/UserLoginSQLAction",
+        "*://jiaowu.swjtu.edu.cn//servlet/UserLoginSQLAction"
+      ],
+      "js": [
         "js/bounce.js",
         "js/advertise.js",
-        "js/student.js",
-        "js/genearch.js",
-        "js/network.js",
-        "js/dispatch.js"
+        "js/studentclicked.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://dean.swjtu.edu.cn/service/login.jsp*"
+      ],
+      "js": [
+        "js/genearch.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://service.swjtu.edu.cn:*/selfservice*"
+      ],
+      "js": [
+        "js/network.js"
       ]
     }
   ],

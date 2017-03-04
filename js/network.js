@@ -15,7 +15,7 @@ function networklogin() {
     setTimeout(click, 1500);
 }
 
-function networkmain() {
+function main() {
     img2string(4, "network.json", function (ret) {
         document.getElementById('verify').value = ret;
         chrome.storage.sync.get({'autoclick': false}, function (result) {
@@ -26,3 +26,4 @@ function networkmain() {
     });
 }
 
+main();

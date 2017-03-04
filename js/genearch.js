@@ -1,7 +1,7 @@
 /**
  * Created by wz on 17-2-24.
  */
-function genearchmain() {
+function main() {
     var callimage2string = function () {
         img2string(4, "genearch.json",function (ret) {
             if (ret)
@@ -24,6 +24,8 @@ function genearchmain() {
             callimage2string();
     });
 }
+
+main();
 
 function genearchclicked() {
     var body = document.body;
