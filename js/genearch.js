@@ -4,10 +4,14 @@
 function main() {
     var callimage2string = function () {
         img2string(4, "genearch.json",function (ret) {
-            if (ret)
+            if (ret){
                 document.getElementById('ranstring').value = ret;
-            else
+                tracker.sendEvent('genearch','split_success','success');
+            }
+            else{
                 document.getElementById('ranstring').value = '分割失败，请刷新网页';
+                tracker.sendEvent('genearch','split_failed','failed');
+            }
             chrome.storage.sync.get({'autoclick': false}, function (result) {
                 if (result.autoclick) {
                     login();

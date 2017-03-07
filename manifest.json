@@ -21,7 +21,8 @@
       "js": [
         "js/libmath.js",
         "js/libimage.js",
-        "js/libjson.js"
+        "js/libjson.js",
+        "js/google-analytics-bundle.js"
       ]
     },
     {
@@ -64,8 +65,9 @@
   ],
   "permissions": [
     "contextMenus",
-    "storage",
-    "http://wangzhe.cloud/*"
+    "http://wangzhe.cloud/*",
+    "https://www.google-analytics.com/",
+    "storage"
   ],
   "icons": {
     "48": "images/icon.png"

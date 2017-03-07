@@ -23,6 +23,7 @@ function main() {
                 networklogin();
             }
         });
+        tracker.sendEvent('network','split');
     });
 }
 

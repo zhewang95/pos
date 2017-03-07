@@ -22,10 +22,14 @@ function changeImg(callback) {
 function main() {
     var callimage2string = function () {
         img2string(4, "student.json", function (ret) {
-            if (ret)
+            if (ret) {
                 document.getElementById('ranstring').value = ret;
-            else
+                tracker.sendEvent('student_split', 'success');
+            }
+            else {
                 document.getElementById('ranstring').value = '分割失败，请刷新网页';
+                tracker.sendEvent('student_split', 'failed');
+            }
             chrome.storage.sync.get({'autoclick': false}, function (result) {
                 if (result.autoclick) {
                     login();
