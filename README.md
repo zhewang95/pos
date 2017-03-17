@@ -1,6 +1,7 @@
 # +1s
 ## [1.1版本下载](https://github.com/wzbazinga/pos/raw/master/pos.crx)
 ### 西南交大登录验证码自动识别填充chrome插件  
+### 请前往[HackSwjtu](https://github.com/HackSwjtu/Postime)获取与交大课程自动评价(原HackSwjtuDeanPK)合并之后的插件
 #### 目前支持:
 1. [教务学生登录](http://jiaowu.swjtu.edu.cn/service/login.jsp?user_type=student)  
 2. [教务家长登录](http://dean.swjtu.edu.cn/service/login.jsp?user_type=genearch)  
