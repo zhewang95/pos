@@ -1,5 +1,5 @@
 # +1s
-## [1.1版本下载](https://github.com/wzbazinga/pos/raw/master/pos.crx)
+## [1.2版本下载](https://github.com/wzbazinga/pos/archive/1.2.tar.gz)
 ### 西南交大登录验证码自动识别填充chrome插件  
 ### 请前往[HackSwjtu](https://github.com/HackSwjtu/Postime)获取与交大课程自动评价(原HackSwjtuDeanPK)合并之后的插件
 #### 目前支持:
@@ -8,7 +8,7 @@
 3. [网络自助服务](http://service.swjtu.edu.cn:8080/selfservice/)  
 
 ### chrome扩展程序安装方法
-1. 点击[链接](https://github.com/wzbazinga/pos/raw/master/pos.crx)下载保存pos.crx文件
+1. 点击[链接](https://github.com/wzbazinga/pos/archive/1.2.tar.gz)下载保存pos.crx文件
 2. 打开chrome浏览器，点击 菜单=>更多工具=>扩展程序 进入扩展管理页面
 3. 鼠标将pos.crx文件拖动到扩展管理页面中
 4. 安装完成，在扩展图标上点击鼠标左/右键可以看到选项
